@@ -26,10 +26,10 @@ def main():
     st.title('Drive Time Calculator')
 
     st.sidebar.header('Input Coordinates')
-    origin_lat = st.sidebar.number_input("Origin Latitude", value=25.003067569091343)
-    origin_lon = st.sidebar.number_input("Origin Longitude", value=55.16747261201182)
-    dest_lat = st.sidebar.number_input("Destination Latitude", value=25.25714576061916)
-    dest_lon = st.sidebar.number_input("Destination Longitude", value=55.29771919667428)
+    origin_lat = st.sidebar.number_input("Origin Latitude", min_value=-90.0, max_value=90.0, value=25.003067569091343)
+    origin_lon = st.sidebar.number_input("Origin Longitude", min_value=-180.0, max_value=180.0, value=55.16747261201182)
+    dest_lat = st.sidebar.number_input("Destination Latitude", min_value=-90.0, max_value=90.0, value=25.25714576061916)
+    dest_lon = st.sidebar.number_input("Destination Longitude", min_value=-180.0, max_value=180.0, value=55.29771919667428)
 
     if st.sidebar.button('Calculate Drive Time'):
         origin = [origin_lon, origin_lat]
