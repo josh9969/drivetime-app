@@ -5,6 +5,8 @@ import geopandas as gpd
 import matplotlib.pyplot as plt
 import contextily as ctx
 import pandas as pd
+from io import BytesIO
+from matplotlib.backends.backend_pdf import PdfPages
 
 API_KEY = '5b3ce3597851110001cf62483c9fa348736d4315a694410fd874e918'
 client = openrouteservice.Client(key=API_KEY)
@@ -78,6 +80,18 @@ def main():
         ax.set_ylabel('Latitude')
 
         st.pyplot(fig)
+
+        # Save the plot as a PDF
+        pdf_buffer = BytesIO()
+        with PdfPages(pdf_buffer) as pdf:
+            pdf.savefig(fig)
+        
+        st.download_button(
+            label="Download map as PDF",
+            data=pdf_buffer.getvalue(),
+            file_name="drive_routes.pdf",
+            mime="application/pdf"
+        )
 
 if __name__ == "__main__":
     main()
